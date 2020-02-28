@@ -1,0 +1,99 @@
+
+<button class="btn btn-primary" data-toggle="modal" data-target="#y">+ADD BATCH</button>
+<br><br>
+<div class="modal" id="y">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="text-info">Add batches</h1>
+               <button class="close" data-dismiss="modal">X</button>
+               
+                </div>
+    
+                <div class="modal-body">
+                    
+                    <form #form="ngForm" (ngSubmit)="addbatch(form.value)">
+                       <label>Enter Batch No</label>
+                       <input type="text" class="form-control" name="batchno" #batchno="ngModel" ngModel required>
+    
+                       <label>Enter Batch Name</label>
+                       <input type="text" class="form-control" name="batchname" #batchname="ngModel" ngModel required>
+    
+                       <label>Enter Batch Duration:</label>
+    
+                      <br>
+                       <label>From</label>
+                       <input type="date" class="form-control" name="from" #from="ngModel" ngModel required>
+                       
+                       <label>To</label>
+                       <input type="date" name="to" class="form-control" #to="ngModel" ngModel required>
+                       <br><br>
+                       
+                       <div class="text-center">
+                       <button class="btn btn-success" type="submit" [disabled]="form.invalid">Submit</button>
+                       </div>
+                       </form>
+                    
+                    
+                    </div>
+        
+    
+                    <div class="modal-footer">
+                       
+                        </div>
+    
+    
+    
+            </div>
+    
+    
+    
+    
+        </div>
+    
+    
+    
+      </div>
+
+<div class="container">
+      <div class="row">
+          <div class="col-md-4" *ngFor="let data of branch">
+
+           <div class="card" >
+               <div class="card-header">
+                   <button class="btn btn-danger" data-dismiss="close">X</button>
+                                
+
+               </div> 
+
+               <div class="card-body">
+              <a routerLink (click)="navigateStudentpage()">Batchno:{{data.batchno}}</a>
+              <br> 
+                 BatchName:{{data.batchname}}
+                 <br>
+               Duration:
+               from:{{data.from}} to: {{data.to}}                
+
+
+            </div> 
+
+            <div class="card-footer">
+
+
+
+            </div> 
+
+
+           </div>
+           
+
+          </div>
+
+      </div>
+
+</div>
+     
+      
+
+  
+<router-outlet></router-outlet>

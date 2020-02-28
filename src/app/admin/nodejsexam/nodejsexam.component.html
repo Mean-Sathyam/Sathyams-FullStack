@@ -1,0 +1,179 @@
+
+ <h1 class="text-danger">ANGULAR QUESTION PAPER</h1>
+
+ <h2 class="text-center bg-danger text-white mt-3 mb-3">{{ startCountdown }}</h2>
+<form #myForm="ngForm">
+  <ul class="list-group mt-3 mb-3" *ngFor="let question of nodejs">
+    <li class="list-group-item">
+      <h5>
+        {{ question.questionno}}) {{question.question }}
+      </h5>
+      <div class="form-row">
+        <div class="col-md-6">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="nodejs{{question.questionno}}"
+                ngModel
+                value="a"
+              />
+              {{ question["a"] }}
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="nodejs{{question.questionno}}"
+                ngModel
+                value="b"
+              />
+              {{ question["b"] }}
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="nodejs{{question.questionno}}"
+                ngModel
+                value="c"
+              />
+              {{ question["c"] }}
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="nodejs{{question.questionno}}"
+                ngModel
+                value="d"
+              />
+              {{ question["d"] }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <button
+    type="submit"
+    #divClick
+    data-toggle="modal" data-target="#exampleModalLong"
+    class="btn btn-success w-25 mx-auto d-block"
+    (click)="submitAnswers(myForm.value)"
+  >
+    Submit Answers
+  </button>
+</form>
+ 
+ 
+
+
+ <!-- bellow code for testing -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Result</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <div class="jumbotron p-3 bg-success text-light text-center">
+        
+              <p class="p-0 m-1">Total No. of Questions : {{ nodejs.length }}</p>
+              <p class="p-0 m-1">No. of Questions Attempt : {{ attemptQuestion }}</p>
+              <p class="p-0 m-1">No of Wrong Answers : {{ wrongAns }}</p>
+              <h3 class="mt-2 mb-0 text-white">Final Score : {{ totalScore }}</h3>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="jumbotron bg-light text-dark pt-4 pb-3">
+              <ul class="list-group mb-2" *ngFor="let question of nodejs">
+                <li class="list-group-item">
+                  <h5>
+                    {{ nodejs.indexOf(question) + 1 }})
+                    {{ question["question"] }}
+                  </h5>
+                  <div class="row">
+                    <div
+                      class="col-6"
+                      [class.font-weight-bold]="question['givenAns'] === 'a'"
+                    >
+                      a) {{ question["a"] }}
+                    </div>
+                    <div
+                      class="col-6"
+                      [class.font-weight-bold]="question['givenAns'] === 'b'"
+                    >
+                      b) {{ question["b"] }}
+                    </div>
+                    <div
+           
+                    class="col-6"
+           
+                      [class.font-weight-bold]="question['givenAns'] === 'c'"
+                 
+                      >
+            
+                    c) {{ question["c"] }}
+                    </div>
+                    <div
+                      class="col-6"
+                      [class.font-weight-bold]="question['givenAns'] === 'd'"
+                    >
+                      d) {{ question["d"] }}
+                    </div>
+                  </div>
+                  <p
+                    class="alert alert-success mt-2 mb-0"
+                    *ngIf="question['correctanswer'] === question['givenAns']"
+                  >
+                    <b>CORRECT : </b> Answer is <b>{{ question["correctanswer"] | uppercase }}</b>
+                  </p>
+                   <p
+                    class="alert alert-danger mt-2 mb-0"
+                    *ngIf="
+                      question['givenAns'] !== '' &&
+                      question['correctanswer'] !== question['givenAns']
+                    "
+                  >
+                    <b>WRONG : </b> Correct Answer is
+                    <b>{{ question["correctanswer"] | uppercase }}</b>
+                  </p>
+                  <p
+                    class="alert alert-dark mt-2 mb-0"
+                    *ngIf="question['givenAns'] === ''"
+                  >
+                    <b>NOT ATTEMPTED : </b> Correct Answer is
+                    <b>{{ question["correctanswer"] | uppercase }}</b>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,207 @@
+
+<div>
+          <div class="row">
+            <div class=" offset-md-8 col-md-4">
+        <button class="btn btn-success mt-3" data-target="#z" data-toggle="modal">+ ADD STUDENT</button>
+          </div>
+
+        <div id="z" class="modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="text-success text-center">Student Registration</h1> 
+                </div>
+
+                <div class="modal-body">
+                  <form #form="ngForm" (ngSubmit)="submitdetails(form.value)">
+                  <label>Enter Batch Name</label>
+                  <input type="text" class="form-control" name="batchname" #batchname="ngModel" ngModel required>
+                  <div *ngIf="batchname.invalid && (batchname.dirty || batchname.touched )" class="alert alert-danger">
+                   <div *ngIf=batchname.errors?.required>*This field is required</div>
+                  </div>
+                 
+                  <label>Enter Student ID</label>
+                  <input type="text" class="form-control" name="studentid" #studentid="ngModel" ngModel required>
+                  <div *ngIf="studentid.invalid && (studentid.dirty || studentid.touched )"  class="alert alert-danger">
+                    <div *ngIf=batchname.errors?.required>*This field is required</div>
+                   </div>
+
+                  <label>Enter UserName</label>
+                  <input type="text" class="form-control" name="username" #username="ngModel" ngModel minlength="7" required>
+                  <div *ngIf="username.invalid && (username.dirty || username.touched )"  class="alert alert-danger">
+                    <div *ngIf=username.errors?.required>*This field is required</div>
+                    <div *ngIf=username.errors?.minlength>*Please Enter minimum 7 characters</div>
+                   </div>
+
+                   <label>Enter Password</label>
+                   <input type="password" class="form-control" name="password" #password="ngModel" ngModel pattern="" required>
+                   <div *ngIf="password.invalid && (password.dirty || password.touched )"  class="alert alert-danger">
+                    <div *ngIf=password.errors?.required>*This field is required</div>
+                    
+                   </div>
+
+
+                  <label>Enter Email</label>
+                  <input type="text" class="form-control" name="email" #email="ngModel" ngModel pattern="[A-Za-z0-9!$%^&()_+=]+@+[A-Za-z]+.com" required>
+                  <div *ngIf="email.invalid && (email.dirty || email.touched )"  class="alert alert-danger">
+
+                    <div *ngIf=email.errors?.required>*This field is required</div>
+                    <div *ngIf=email.errors?.pattern>*Please enter the valid Email</div>
+                   </div>
+
+                  <label>Enter Phone Number</label>
+                    <input type="text" class="form-control" name="phoneno" #phoneno="ngModel" pattern="[0-9]{10}" ngModel required>
+                  <div *ngIf="phoneno.invalid && (phoneno.dirty || phoneno.touched )"  class="alert alert-danger">
+                    <div *ngIf=phoneno.errors?.required>*This field is required</div>
+                    <div *ngIf=phoneno.errors?.pattern>*Please enter the valid mobile number</div>
+                   </div>
+
+                  <label>Course</label>
+                  <select name="select" id="" class="form-control" #select="ngModel" ngModel required>
+                    <option value="angular" >ANGULAR</option >
+                      <option value="mongodb" >MONGODB</option >
+                        <option value="expressjs" >EXPRESS JS</option >
+                          <option value="nodejs" >NODE JS</option >
+                  </select>
+                      <br>
+                  <label>Enter Address</label>
+                  <input type="text" class="form-control" name="address" #address="ngModel" pattern="" ngModel required>
+                  <div *ngIf="address.invalid && (address.dirty || address.touched )" class="alert alert-danger">
+                    <div *ngIf=address.errors?.required>*This field is required</div>
+                   </div>
+                   <br>
+                  <label>Enter Gender</label>
+                  <input type="radio" name="radio" id="" value="male"  ngModel>MALE
+                  <input type="radio" name="radio" id="" value="female"  ngModel>FEMALE
+                   <br>
+                  <button class="btn btn-danger form-control" type="submit" [disabled]="form.invalid">REGISTER</button>
+                  </form>
+                  </div>
+ 
+                  <div class="modal-footer">
+
+
+                    </div>
+
+
+              </div>
+
+            </div>        
+            
+       </div>
+</div>
+<br><br>
+
+<table class="table table-dark table-responsive-md">
+  <thead>
+    
+    <th>BATCH NAME</th>
+    <th>STUDENT ID</th>
+    <th>NAME</th>
+    <th>EMAIL</th>
+    <th>PHONE NUMBER</th>
+    <th>COURSE</th>
+    <th>ADDRESS</th>
+    <th>GENDER</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+  
+  </thead>
+  <tr *ngFor="let data2 of addstudent">
+    <td>{{data2.batchname}}</td>
+    <td>{{data2.studentid}}</td>
+    <td>{{data2.username}}</td>
+    <td>{{data2.email}}</td>
+    <td>{{data2.phoneno}}</td>
+    <td>{{data2.select}}</td>
+    <td>{{data2.address}}</td>
+    <td>{{data2.radio}}</td>
+    <td><button class="btn btn-success" data-toggle="modal" (click)="editobj(data2)" data-target="#y">EDIT</button></td>  
+    <td><button class="btn btn-danger" (click)="delete(data2)">DELETE</button></td>
+
+  </tr>
+
+</table>       
+
+        
+        <div class="modal" id="y">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                
+                  <h1>UPDATE FORM</h1>
+
+                
+
+
+              </div>
+
+              <div class="modal-body">
+                
+                <div>
+                <form #form1="ngForm" (ngSubmit)="updateform(form1.value)">
+                  <label>Enter Student ID</label>
+                  <input type="text" class="form-control" name="studentid" readonly="readonly" #studentid1="ngModel" [ngModel]="editObject.studentid" required>                  
+                 
+                  <label>Enter UserName</label>
+                  <input type="text" class="form-control" name="username" #username1="ngModel" [ngModel]="editObject.username">
+                 
+                  <label>Enter Password</label>
+                  <input type="password" class="form-control" name="password" #password1="ngModel" [ngModel]="editObject.password" required>
+                 
+                  <label>Enter Email</label>
+                  <input type="text" class="form-control" name="email" #email1="ngModel" [ngModel]="editObject.email">
+                 
+                  <label>Enter Phone Number</label>
+                    <input type="text" class="form-control" name="phoneno" #phoneno1="ngModel" pattern="" [ngModel]="editObject.phoneno" >
+                 
+                  <label>Course</label>
+                  <select name="select" id="" class="form-control" #select="ngModel" [ngModel]="editObject.select" >
+                    <option value="angular" >ANGULAR</option >
+                      <option value="mongodb" >MONGODB</option >
+                        <option value="expressjs" >EXPRESS JS</option >
+                          <option value="nodejs" >NODE JS</option >
+                  </select>
+                 
+                  <br>
+                 
+                  <label>Enter Address</label>
+                  <input type="text" class="form-control" name="address" #address="ngModel" pattern="" [ngModel]="editObject.address" >
+                   <br>
+
+                   <button class="btn btn-danger form-control " type="submit" >UPDATE</button>
+                   
+                </form>
+
+
+
+
+                </div>
+
+                
+
+
+              </div>
+
+              <div class="modal-footer">
+                
+
+
+                
+
+
+              </div>
+
+            
+
+
+          
+
+
+
+        </div>
+        </div>
+        </div>
+        
+        
+        
